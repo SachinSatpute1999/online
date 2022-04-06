@@ -2,64 +2,75 @@ const promise = require("bluebird");
 
 
 const initOptions = {
-    promiseLib: promise // overriding the default (ES6 Promise);
+    promiseLib: promise 
+
 };
+  const pgp=require('pg-promise')(initOptions);
 
-const pgp = require('pg-promise')(initOptions);
-// See also: http://vitaly-t.github.io/pg-promise/module-pg-promise.html
+  const cn = {
+      host: 'localhost',
+      port: 5432, 
+      database: 'grocerydb',
+      user: 'postgres',
+      password: 'root',
+       
+      allowExitOnIdle: true
+  };
+   
+  const db = pgp(cn);
 
-// Database connection details;
-const cn = {
-    host: 'localhost', // 'localhost' is the default;
-    port: 5432, // 5432 is the default;
-    database: 'productdb',
-    user: 'postgres',
-    password: 'root',
+   var AllProducts= undefined;
+   var AllCategories= undefined;
+   var CategoryById =undefined;
 
-    // to auto-exit on idle, without having to shut-down the pool;
-    // see https://github.com/vitaly-t/pg-promise#library-de-initialization
-    allowExitOnIdle: true
-};
-// You can check for all default values in:
-// https://github.com/brianc/node-postgres/blob/master/packages/pg/lib/defaults.js
-
-const db = pgp(cn); // database instance;
-
-var allBook = undefined;
-var allGroceryProducts=undefined;
-
-db.many("Select * from book;")
-.then((data) => { 
-   this.allBook =  data;
-}).catch((error) => {
+  db.many("Select * from products;")
+  .then((data) => {
+      this.AllProducts = data;
+}) .catch((error) => {
     console.log("Error : " + error);
 });
 
-db.many("Select * from products;")
-.then((data) => { 
-   this.allGroceryProducts =  data;
-}).catch((error) => {
-    console.log("Error : " + error);
+db.many("Select * from product_category;")
+.then((data) => {
+    this.AllCategories= data;
+}) .catch((error) => {
+  console.log("Error : " + error);
 });
 
- 
+db.many("Select * from products where category_id=$1;")
+.then((data) => {
+    this.CategoryById = data;
+}) .catch((error) => {
+  console.log("Error : " + error);
+});
 
 const express = require("express");
 const server = express();
 const port = 3000;
 const cors = require("cors");
+const CORS_OPTIONS={origin:"http://localhost:4200"};
+server.use(express.json())
+server.use(express.urlencoded({extended:true}))
+server.use(cors(CORS_OPTIONS));
+  const { all } = require("bluebird");
 
 server.use(cors());
-
-server.get("/book",(req, res) => {
+  server.use(express.json());
+server.get("/products",(req,res) => {
     res.setHeader("content-type","application/json");
-    res.send(this.allBook);
-});
-server.get("/products",(req, res) => {
-    res.setHeader("content-type","application/json");
-    res.send(this.allGroceryProducts);
+    res.send(this.AllProducts);
 });
 
-server.listen(port,()=> {
+server.get("/productCategory",(req,res) => {
+    res.setHeader("content-type","application/json");
+    res.send(this.AllCategories);
+});
+
+server.get("/CategoryById/:category_id",(req,res) => {
+    res.setHeader("content-type","application/json");
+    res.send(this.CategoryById);
+});
+
+server.listen(port,()=> { 
     console.log("Server started");
 });
