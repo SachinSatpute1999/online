@@ -27,7 +27,7 @@ const initOptions = {
   .then((data) => {
       this.AllProducts = data;
 }) .catch((error) => {
-    console.log("Error : " + error);
+    console.log("Error : " + error); 
 });
 
 db.many("Select * from product_category;")
@@ -37,7 +37,7 @@ db.many("Select * from product_category;")
   console.log("Error : " + error);
 });
 
-db.many("Select * from products where category_id=$1;")
+db.many("Select * from products where category_id=1;")
 .then((data) => {
     this.CategoryById = data;
 }) .catch((error) => {

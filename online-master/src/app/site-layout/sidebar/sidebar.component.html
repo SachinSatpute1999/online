@@ -1,13 +1,12 @@
-
 <div>
-    <h1></h1>
+  <h1></h1>
 </div>
 
-<a href="products" class="list-group-item" style="background-color:grey">  All Products
-  </a>
-  
-<div class= "list-group"*ngFor="let catg of categoryList">
+<a href="products" class="list-group-item" style="background-color:khaki"> All Products
+</a>
 
-    <a href="products/category/{{catg.category_id}}" class="list-group-item" >{{catg.c_name}}
-      </a>
-    </div>
+<div class="list-group" *ngFor="let catg of categoryList">
+
+  <a href="products/CategoryById/{{catg.category_id}}" class="list-group-item" style="background-color:beige">{{catg.c_name}}
+  </a>
+</div>

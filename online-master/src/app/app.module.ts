@@ -9,10 +9,16 @@ import { OrdersModule } from './orders/orders.module';
 
 import { SiteLayoutModule } from './site-layout/site-layout.module';
 import { ProductsComponent } from './products/products.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+// import { CheckoutComponent } from './checkout/checkout/checkout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CartComponent,
+    CheckoutComponent,
+    // CheckoutComponent
     
   
     

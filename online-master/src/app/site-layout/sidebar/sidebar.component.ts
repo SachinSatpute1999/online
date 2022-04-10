@@ -18,11 +18,22 @@ export class categoryList{
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  categoryById:any[]=[];
   categoryList:any[] = [];
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.getAllCategories();
+    this.http.get<any>('http://localhost:3000/categoryById/:id').subscribe(
+
+      response => {
+
+        console.log(response);
+
+        this.categoryById = response;
+
+       });
   }
   getAllCategories(){
 

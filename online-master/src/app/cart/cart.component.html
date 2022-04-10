@@ -1,0 +1,70 @@
+<div class="container">
+    
+    <ng-container >
+      <div class="row" style="padding-top: 2em;">
+        <div class="col my-4">
+          <table class="table" >
+            <thead class="table-dark">
+            <tr class="text-center">
+              <th>Photo</th>
+              <th>p_name</th>
+              <th>Price</th>
+              <th>Remove Product</th>
+              <!-- <th>Quantity</th> -->
+              <!-- <th>Subtotal</th> -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of getCartDetails">
+              <td class="d-flex align-items-center justify-content-around" >
+                <span class="text-danger" style="cursor: pointer;"><i class="fa fa-trash" ></i></span>
+                <img [src]="item.photo" height="60" class="order-1">               
+              </td>
+              <td><p>{{item.p_name}}</p></td>
+              <td>
+                <p>{{item.price}}</p>
+              </td>
+              <td>
+                <form >
+                  <!-- <div class="value-button btn btn-danger" id="decrease" >
+                    <i class="fa fa-minus"></i>
+                  </div>
+                 <span><input type="text" style="width: 1cm;"></span> 
+                  <div class="value-button btn btn-success" id="increase" >
+                    <i class="fa fa-plus"></i>
+                  </div> -->
+                  <button class= "btn btn-danger btn-sm order-1"  routerLinkActive="active" (click)="delete(item.product_id)"> Delete</button>
+                </form>
+              </td>
+              <!-- <td> -->
+                <!-- <p>{{item.price}}</p> -->
+              <!-- </td> -->
+            </tr>
+            <tr class="border-0">
+              <td style="border: none;"></td>
+              <td></td>
+              <td></td>
+              <td>Total Cost :₹ {{total}} </td> 
+              <td></td>
+  
+            </tr>
+  
+            </tbody>
+          </table>
+  
+  
+        </div>
+  
+        <div class="col-md-12 d-flex mb-5" style="padding-bottom: 2em;">
+          <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
+            <a routerLink="/category" class="btn btn-success btn-sm order-0 " >Continue Shopping</a>
+										</div>
+            <a routerLink="/checkout" class="btn btn-danger btn-sm order-1" style="float: right; background-color: #F40058;">Checkout</a>
+          </div>
+        </div>
+  
+      
+    </ng-container>
+  
+  </div>
+  

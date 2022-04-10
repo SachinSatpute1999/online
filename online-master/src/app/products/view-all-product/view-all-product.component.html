@@ -1,5 +1,3 @@
-
-
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -7,24 +5,30 @@
             <div class="col mb-5" *ngFor="let product of productlist">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top" src="{{product.photo}}" alt="..." />
+                    <img class="card-img-top" src="{{product.photo}}" height="152px" alt="..." />
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder">{{product.p_name}}</h5>
+                            <h5 class="fw-bolder"><a routerLink="view-product/{{product.product_id}}"> {{product.p_name}}</a></h5>
                             <!-- Product price-->
-                          {{product.price}}
+                            {{product.price}}
                         </div>
                     </div>
                     <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View</a></div>
+                    <!-- <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="cart">Add To Cart(product)</a></div>
+                    </div> -->
+
+                    <div class="add-to-cart">
+
+                        <button class="add-to-cart-btn" routerLinkActive="active" (click)="addToCart(product)"><i
+                                class="fa fa-shopping-cart"></i> add to cart</button>
+
                     </div>
                 </div>
             </div>
-            
-            </div>
-            </div>
-            </section>
-            
+
+        </div>
+    </div>
+</section>

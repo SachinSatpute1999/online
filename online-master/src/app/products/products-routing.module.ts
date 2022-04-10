@@ -5,14 +5,13 @@ import { ViewAllProductComponent } from './view-all-product/view-all-product.com
 import { ViewProductByCategoryComponent } from './view-product-by-category/view-product-by-category.component';
 import { ViewProductByDateComponent } from './view-product-by-date/view-product-by-date.component';
 import { ViewProductComponent } from './view-product/view-product.component';
-
 const routes: Routes = [
   { path: '', component: ViewAllProductComponent },
   { path: 'view-product', component: ViewProductComponent },
-  //{ path: 'list-product', component: ViewAllProductComponent },
-  { path: 'search-cat', component: ViewProductByCategoryComponent },
-  { path: 'search-date', component: ViewProductByDateComponent }
-  
+  { path: 'list-product', component: ViewAllProductComponent },
+  { path: 'CategoryById/:id', component: ViewProductByCategoryComponent },
+  { path: 'search-date', component: ViewProductByDateComponent },
+
   
   
 
