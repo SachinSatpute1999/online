@@ -10,16 +10,12 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder"><a routerLink="view-product/{{product.product_id}}"> {{product.p_name}}</a></h5>
+                            <h5 class="fw-bolder"><a routerLink="view-product/{{product.product_id}}">
+                                    {{product.p_name}}</a></h5>
                             <!-- Product price-->
                             {{product.price}}
                         </div>
                     </div>
-                    <!-- Product actions-->
-                    <!-- <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="cart">Add To Cart(product)</a></div>
-                    </div> -->
-
                     <div class="add-to-cart">
 
                         <button class="add-to-cart-btn" routerLinkActive="active" (click)="addToCart(product)"><i

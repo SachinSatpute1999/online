@@ -1,14 +1,10 @@
-
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { CartService } from 'src/app/service/cart.service';
-// import { CategoryService } from 'src/app/category.service';
-// import { Icategory } from 'src/app/icategory';
 import { ActivatedRoute } from '@angular/router';
 // import { viewallproduct } from 'src/app/products/view-all-product';
 import { productlist, ViewAllProductComponent } from '../products/view-all-product/view-all-product.component';
 import { ProductsService } from '../products.service';
-
+// import { CheckoutComponent } from '../checkout/checkout.component';
 
 // import { ViewAllProductComponent } from '../products/view-all-product/view-all-product.component';
 // @Inject(CategoryService)
@@ -21,38 +17,27 @@ import { ProductsService } from '../products.service';
 })
 export class CartComponent implements OnInit {
   // category! : Icategory[];
-  product! : productlist[];
+  product!: productlist[];
   products: productlist | undefined;
-  constructor( private productsService: ProductsService,
+  constructor(private productsService: ProductsService,
     private route: ActivatedRoute,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    ) { }
 
-  
-  // items = this.cartService.getItems();
 
-  // constructor( private categoryService :CategoryService,
-  //   private route: ActivatedRoute,
-  //   private cartService: CartService) { }
+
 
   ngOnInit(): void {
-    // this.categoryService.getAllCategory().subscribe((data : Icategory[]) => {
-    //   this.category = data;
-    // });
-
-
-    // this.productsService.getAllProducts().subscribe((data : productlist[]) => {
-    //   this.product = data;
-    // });
     this.CartDetails();
     this.loadCart();
 
   }
-  
-  getCartDetails:any=[];
 
-  CartDetails(){
+  getCartDetails: any = [];
 
-    if(localStorage.getItem('localCart')){
+  CartDetails() {
+
+    if (localStorage.getItem('localCart')) {
 
       this.getCartDetails = JSON.parse(localStorage.getItem('localCart') || '{}');
 
@@ -61,7 +46,7 @@ export class CartComponent implements OnInit {
     }
 
   }
-
+  
 
 
   total:number = 0;
@@ -74,35 +59,43 @@ export class CartComponent implements OnInit {
 
       this.total = this.getCartDetails.reduce(function(acc: any, val: any){
 
-        return acc + (val.price);
+        return acc + (val.price * val.prodquantity);
 
       },0);
 
     }
 
+    this.cartService.totalSubject.next(this.total);
+
   }
 
+
+
+
+
+  // emptyCart()
+  // {
+  //   this.cartService.clearCart();
+  // }
   // removeFromCart() {
   //   this.getCartDetails.pop();
   // }
 
-  delete(getCartDetail: any){
+  delete(getCartDetail: any) {
 
-    if(localStorage.getItem('localCart')){
+    if (localStorage.getItem('localCart')) {
 
       this.getCartDetails = JSON.parse(localStorage.getItem('localCart') || '{}');
 
-      for( let i=0; i<this.getCartDetails.length; i++){
+      for (let i = 0; i < this.getCartDetails.length; i++) {
 
-        if(this.getCartDetails[i].product_id === getCartDetail){
+        if (this.getCartDetails[i].product_id === getCartDetail) {
 
           this.getCartDetails.splice(i, 1);
 
           localStorage.setItem('localCart', JSON.stringify(this.getCartDetails));
 
           this.loadCart();
-
-          
 
         }
 
@@ -111,13 +104,109 @@ export class CartComponent implements OnInit {
     }
 
   }
-  // getTotal(){
-  //   var total = 0;
-  //   this.getCartDetails.forEach((item: { price: number; }) => {
-  //     total += item.price;
-  //   });
-  //   return total;
-  // }
+
+
+  incQnt(prodId: any, qnt: any){
+
+    for(let i=0; i<this.getCartDetails.length; i++){
+
+      if(this.getCartDetails[i].product_id === prodId){
+
+        if(qnt != 5)
+
+          this.getCartDetails[i].prodquantity = parseInt(qnt) + 1;
+
+      }
+
+    }
+
+    localStorage.setItem('localCart', JSON.stringify(this.getCartDetails));
+
+    this.loadCart();
+
+  
+
+  }
+
+  decQnt(prodId: any, qnt: any){
+
+    for(let i=0; i<this.getCartDetails.length; i++){
+
+      if(this.getCartDetails[i].product_id === prodId){
+
+        if(qnt != 1)
+
+          this.getCartDetails[i].prodquantity = parseInt(qnt) - 1;
+
+      }
+
+    }
+
+    localStorage.setItem('localCart', JSON.stringify(this.getCartDetails));
+
+    this.loadCart();
+
+  }
+
+  singleDelete(getCartDetail: any){
+
+    if(localStorage.getItem('localCart')){
+
+      this.getCartDetails = JSON.parse(localStorage.getItem('localCart') || '{}');
+
+
+
+      for( let i=0; i<this.getCartDetails.length; i++){
+
+        if(this.getCartDetails[i].prodid === getCartDetail){
+
+          this.getCartDetails.splice(i, 1);
+
+          localStorage.setItem('localCart', JSON.stringify(this.getCartDetails));
+
+          this.loadCart();
+
+          this.cartNumberFunc();
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+  cartNumber:number = 0;
+
+  cartNumberFunc(){
+
+    var cartValue = JSON.parse(localStorage.getItem('localcart') || '{}');
+
+    this.cartNumber = cartValue.length;
+
+    this.cartService.cartSubject.next(this.cartNumber);
+
+  }
+  removeall(){
+
+    localStorage.removeItem('localCart');
+
+    this.getCartDetails = [];
+
+    this.total = 0;
+
+    this.cartNumber = 0;
+
+    this.cartService.cartSubject.next(this.cartNumber);
+
+  }
+
+  checkoutbtn(){
+
+    // this.router.navigateByUrl('/checkout');
+
+  }
 }
 
 

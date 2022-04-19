@@ -49,7 +49,8 @@ export class ViewAllProductComponent implements OnInit {
   }
   getAllProducts(){
 
-    this.http.get<any>('http://localhost:3000/products').subscribe(
+    this.http.get<any>('https://localhost:44307/products/getallproducts').subscribe(
+      // this.http.get<any>('http://localhost:3000/products').subscribe(
 
       response => {
 

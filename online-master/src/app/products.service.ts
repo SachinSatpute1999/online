@@ -10,15 +10,16 @@ export class ProductsService {
     constructor( private httpClient: HttpClient ){ }
 
     getAllProducts(): any{
-       return this.httpClient.get("http://localhost:3000/products");
+       return this.httpClient.get("https://localhost:44307/products/getallproducts");
+      //  return this.httpClient.get("http://localhost:3000/products");
   }
   
 
-  getAllCategory(): any{
-    return this.httpClient.get("http://localhost:3000/productCategory");
-}
+    getAllCategory(): any{
+      return this.httpClient.get("http://localhost:3000/productCategory");
+  }
 
-getCtegoryById(): any{
-  return this.httpClient.get("http://localhost:3000/products/CategoryById/:id");
-}
+  getCtegoryById(): any{
+    return this.httpClient.get("http://localhost:3000/products/CategoryById/:id");
+  }
 }

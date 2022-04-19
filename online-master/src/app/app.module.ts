@@ -12,13 +12,14 @@ import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 // import { CheckoutComponent } from './checkout/checkout/checkout.component';
-
+// import { CheckComponent } from './check/check.component';
 @NgModule({
   declarations: [
     AppComponent,
     CartComponent,
     CheckoutComponent,
-    // CheckoutComponent
+    // CheckComponent
+    
     
   
     
@@ -28,7 +29,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     AppRoutingModule,
     OrdersModule,
     SiteLayoutModule,
-    HttpClientModule
+    HttpClientModule,
   
   
   

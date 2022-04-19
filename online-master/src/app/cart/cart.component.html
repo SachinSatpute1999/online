@@ -1,70 +1,134 @@
-<div class="container">
-    
-    <ng-container >
-      <div class="row" style="padding-top: 2em;">
-        <div class="col my-4">
-          <table class="table" >
-            <thead class="table-dark">
-            <tr class="text-center">
-              <th>Photo</th>
-              <th>p_name</th>
-              <th>Price</th>
-              <th>Remove Product</th>
-              <!-- <th>Quantity</th> -->
-              <!-- <th>Subtotal</th> -->
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of getCartDetails">
-              <td class="d-flex align-items-center justify-content-around" >
-                <span class="text-danger" style="cursor: pointer;"><i class="fa fa-trash" ></i></span>
-                <img [src]="item.photo" height="60" class="order-1">               
-              </td>
-              <td><p>{{item.p_name}}</p></td>
-              <td>
-                <p>{{item.price}}</p>
-              </td>
-              <td>
-                <form >
-                  <!-- <div class="value-button btn btn-danger" id="decrease" >
-                    <i class="fa fa-minus"></i>
-                  </div>
-                 <span><input type="text" style="width: 1cm;"></span> 
-                  <div class="value-button btn btn-success" id="increase" >
-                    <i class="fa fa-plus"></i>
-                  </div> -->
-                  <button class= "btn btn-danger btn-sm order-1"  routerLinkActive="active" (click)="delete(item.product_id)"> Delete</button>
-                </form>
-              </td>
-              <!-- <td> -->
-                <!-- <p>{{item.price}}</p> -->
-              <!-- </td> -->
-            </tr>
-            <tr class="border-0">
-              <td style="border: none;"></td>
-              <td></td>
-              <td></td>
-              <td>Total Cost :₹ {{total}} </td> 
-              <td></td>
-  
-            </tr>
-  
-            </tbody>
-          </table>
-  
-  
-        </div>
-  
-        <div class="col-md-12 d-flex mb-5" style="padding-bottom: 2em;">
-          <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
-            <a routerLink="/category" class="btn btn-success btn-sm order-0 " >Continue Shopping</a>
-										</div>
-            <a routerLink="/checkout" class="btn btn-danger btn-sm order-1" style="float: right; background-color: #F40058;">Checkout</a>
+<section class="cart_section">
+
+  <div class="container">
+
+    <div class="heading text-center">
+
+      <h2>My Cart !</h2>
+
+      <hr>
+
+    </div>
+
+
+
+    <div *ngIf="getCartDetails">
+
+      <table>
+
+        <tr>
+
+          <th>Image</th>
+
+          <th>Product Id</th>
+
+          <th>Quantity</th>
+
+          <th>Price (₹)</th>
+
+          <th>Sub Total (₹)</th>
+
+          <th>Remove Item</th>
+
+        </tr>
+        <tr *ngFor="let getCartDetail of getCartDetails">
+
+          <td><img src="{{getCartDetail.photo}}"></td>
+
+          <td>{{getCartDetail.product_id}}</td>
+
+          <td>
+
+            <button type="button" class="quan" (click)="incQnt(getCartDetail.product_id, getCartDetail.prodquantity)">
+
+              <!-- <i class="fa fa-plus-square"></i> -->
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+              </svg> -->
+              
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+
+              </svg>
+
+            </button>
+
+            <span>{{getCartDetail.prodquantity}}</span>
+
+            <button type="button" class="quan" (click)="decQnt(getCartDetail.product_id, getCartDetail.prodquantity)">
+
+              <!-- <i class="fa fa-minus-square"></i> -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
+                <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
+                <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+              </svg>
+
+            </button>
+
+          </td>
+          <td>{{getCartDetail.price}}</td>
+
+          <td>{{getCartDetail.prodquantity * getCartDetail.price | number}}</td>
+
+          <td><button type="button" class="delete" (click)="delete(getCartDetail.product_id)">
+            <!-- <i
+                class="fa fa-trash"></i> -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="25" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                </svg>
+
+            </button></td>
+
+        </tr>
+
+      </table>
+
+      <ng-container *ngIf="getCartDetails.length ==0">
+          <div class="container">
+              <div class="card">
+              </div>
+              <div class="center">
+                  <img src="https://pngset.com/images/bootstrap-5-ecommerce-user-dashboard-with-order-tracking-example-red-cart-icon-shopping-cart-first-aid-transparent-png-2810479.png" alt="" height="228" width="560">
+                 <div class="center"> 
+                  <h4>Your cart is empty!</h4>
+                  <h6>Add item to it now</h6>
+                 </div>
+                  <!-- <button routerLink="/products" class="btn" style="background-color: tomato;">Shop Now</button> -->
+              </div>
+              
           </div>
-        </div>
-  
-      
-    </ng-container>
-  
+        </ng-container><div class="col-md-12 d-flex mb-5" style="padding-bottom: 2em;">
+          <div class="d-flex w-100 justify-content-between flex-sm-column flex-md-row">
+            <a routerLink="/view-all-product" class="btn btn-success btn-sm order-0 ">Continue Shopping</a>
+          </div>
+          </div>
+    </div>
+    <div class="col-md-6">
+
+      <h4>Total - ₹ {{total}} /-</h4>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <button type="button" class="removeall" (click)="removeall()">
+
+        <i class="fa fa-trash-o"></i> Remove All
+
+      </button>
+
+    </div>
+
+    <!-- <div>
+
+      <button type="button" class="checkout" (click)="checkoutbtn()" >Checkout</button>
+
+    </div> -->
+
   </div>
-  
+  <!-- </div> -->
+
+</section>

@@ -30,19 +30,7 @@ const initOptions = {
     console.log("Error : " + error); 
 });
 
-db.many("Select * from product_category;")
-.then((data) => {
-    this.AllCategories= data;
-}) .catch((error) => {
-  console.log("Error : " + error);
-});
 
-db.many("Select * from products where category_id=1;")
-.then((data) => {
-    this.CategoryById = data;
-}) .catch((error) => {
-  console.log("Error : " + error);
-});
 
 const express = require("express");
 const server = express();
@@ -61,15 +49,7 @@ server.get("/products",(req,res) => {
     res.send(this.AllProducts);
 });
 
-server.get("/productCategory",(req,res) => {
-    res.setHeader("content-type","application/json");
-    res.send(this.AllCategories);
-});
 
-server.get("/CategoryById/:category_id",(req,res) => {
-    res.setHeader("content-type","application/json");
-    res.send(this.CategoryById);
-});
 
 server.listen(port,()=> { 
     console.log("Server started");
