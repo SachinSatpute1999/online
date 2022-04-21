@@ -6,20 +6,12 @@ import { productlist, ViewAllProductComponent } from './products/view-all-produc
   providedIn: 'root'
 })
 export class ProductsService {
-   
-    constructor( private httpClient: HttpClient ){ }
 
-    getAllProducts(): any{
-       return this.httpClient.get("https://localhost:44307/products/getallproducts");
-      //  return this.httpClient.get("http://localhost:3000/products");
-  }
-  
+  constructor(private httpClient: HttpClient) { }
 
-    getAllCategory(): any{
-      return this.httpClient.get("http://localhost:3000/productCategory");
+  getAllProducts(): any {
+    return this.httpClient.get("https://localhost:44307/products/getallproducts");
+    //  return this.httpClient.get("http://localhost:3000/products");
   }
 
-  getCtegoryById(): any{
-    return this.httpClient.get("http://localhost:3000/products/CategoryById/:id");
-  }
 }

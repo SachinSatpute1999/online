@@ -1,13 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { CartService } from 'src/app/service/cart.service';
 import { ActivatedRoute } from '@angular/router';
-// import { viewallproduct } from 'src/app/products/view-all-product';
 import { productlist, ViewAllProductComponent } from '../products/view-all-product/view-all-product.component';
 import { ProductsService } from '../products.service';
-// import { CheckoutComponent } from '../checkout/checkout.component';
-
-// import { ViewAllProductComponent } from '../products/view-all-product/view-all-product.component';
-// @Inject(CategoryService)
 @Inject(CartService)
 
 @Component({
@@ -22,7 +17,7 @@ export class CartComponent implements OnInit {
   constructor(private productsService: ProductsService,
     private route: ActivatedRoute,
     private cartService: CartService,
-    ) { }
+  ) { }
 
 
 
@@ -46,22 +41,22 @@ export class CartComponent implements OnInit {
     }
 
   }
-  
 
 
-  total:number = 0;
 
-  loadCart(){
+  total: number = 0;
 
-    if(localStorage.getItem('localCart')){
+  loadCart() {
+
+    if (localStorage.getItem('localCart')) {
 
       this.getCartDetails = JSON.parse(localStorage.getItem('localCart') || '{}');
 
-      this.total = this.getCartDetails.reduce(function(acc: any, val: any){
+      this.total = this.getCartDetails.reduce(function (acc: any, val: any) {
 
         return acc + (val.price * val.prodquantity);
 
-      },0);
+      }, 0);
 
     }
 
@@ -70,13 +65,13 @@ export class CartComponent implements OnInit {
   }
 
 
-  addToCart(products: productlist,quantity =1) {
+  addToCart(products: productlist, quantity = 1) {
 
     let productsExists = false
 
-    for(let i in this.getCartDetails){
+    for (let i in this.getCartDetails) {
 
-      if(this.getCartDetails[i].product_id === products.product_id){
+      if (this.getCartDetails[i].product_id === products.product_id) {
 
         this.getCartDetails[i].quantity++
 
@@ -84,26 +79,23 @@ export class CartComponent implements OnInit {
 
         break;
 
-      }      
+      }
 
     }
 
-    if(!productsExists){            
+    if (!productsExists) {
 
-      this.getCartDetails.push(products);    
+      this.getCartDetails.push(products);
 
-  }      
+    }
 
   }
 
 
-  emptyCart()
-  {
+  emptyCart() {
     this.cartService.clearCart();
   }
-  // removeFromCart() {
-  //   this.getCartDetails.pop();
-  // }
+
 
   delete(getCartDetail: any) {
 
@@ -130,13 +122,13 @@ export class CartComponent implements OnInit {
   }
 
 
-  incQnt(prodId: any, qnt: any){
+  incQnt(prodId: any, qnt: any) {
 
-    for(let i=0; i<this.getCartDetails.length; i++){
+    for (let i = 0; i < this.getCartDetails.length; i++) {
 
-      if(this.getCartDetails[i].product_id === prodId){
+      if (this.getCartDetails[i].product_id === prodId) {
 
-        if(qnt != 5)
+        if (qnt != 5)
 
           this.getCartDetails[i].prodquantity = parseInt(qnt) + 1;
 
@@ -148,17 +140,17 @@ export class CartComponent implements OnInit {
 
     this.loadCart();
 
-  
+
 
   }
 
-  decQnt(prodId: any, qnt: any){
+  decQnt(prodId: any, qnt: any) {
 
-    for(let i=0; i<this.getCartDetails.length; i++){
+    for (let i = 0; i < this.getCartDetails.length; i++) {
 
-      if(this.getCartDetails[i].product_id === prodId){
+      if (this.getCartDetails[i].product_id === prodId) {
 
-        if(qnt != 1)
+        if (qnt != 1)
 
           this.getCartDetails[i].prodquantity = parseInt(qnt) - 1;
 
@@ -172,17 +164,17 @@ export class CartComponent implements OnInit {
 
   }
 
-  singleDelete(getCartDetail: any){
+  singleDelete(getCartDetail: any) {
 
-    if(localStorage.getItem('localCart')){
+    if (localStorage.getItem('localCart')) {
 
       this.getCartDetails = JSON.parse(localStorage.getItem('localCart') || '{}');
 
 
 
-      for( let i=0; i<this.getCartDetails.length; i++){
+      for (let i = 0; i < this.getCartDetails.length; i++) {
 
-        if(this.getCartDetails[i].product_id === getCartDetail){
+        if (this.getCartDetails[i].product_id === getCartDetail) {
 
           this.getCartDetails.splice(i, 1);
 
@@ -201,9 +193,9 @@ export class CartComponent implements OnInit {
   }
 
 
-  cartNumber:number = 0;
+  cartNumber: number = 0;
 
-  cartNumberFunc(){
+  cartNumberFunc() {
 
     var cartValue = JSON.parse(localStorage.getItem('localcart') || '{}');
 
@@ -212,7 +204,7 @@ export class CartComponent implements OnInit {
     this.cartService.cartSubject.next(this.cartNumber);
 
   }
-  removeall(){
+  removeall() {
 
     localStorage.removeItem('localCart');
 
@@ -226,9 +218,7 @@ export class CartComponent implements OnInit {
 
   }
 
-  checkoutbtn(){
-
-    // this.router.navigateByUrl('/checkout');
+  checkoutbtn() {
 
   }
 }

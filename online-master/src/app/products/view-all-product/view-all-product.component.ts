@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { ProductsComponent } from '../products.component';
 import { inject } from '@angular/core/testing';
 import { CartService } from 'src/app/service/cart.service';
@@ -7,24 +7,25 @@ import { ProductsService } from 'src/app/products.service';
 import { ActivatedRoute } from '@angular/router';
 // import { cwd } from 'process';
 
-export class productlist{
+export class productlist {
 
   constructor(
 
-  public product_id: Number,
+    public product_id: Number,
 
-  public p_name : string,
+    public p_name: string,
 
-  public category_id : Number,
+    public category_id: Number,
 
-  public price : number,
+    public price: number,
 
-  public photo : string,
+    public photo: string,
 
-  public description: string
+    public description: string
 
-  ){
-}}
+  ) {
+  }
+}
 
 @Inject(CartService)
 @Inject(ProductsService)
@@ -35,20 +36,20 @@ export class productlist{
 })
 export class ViewAllProductComponent implements OnInit {
 
-   productlist:any[]=[];
+  productlist: any[] = [];
   items: any;
   constructor(private http: HttpClient,
-    private route:ActivatedRoute,
-    private productsService:ProductsService,
-    private cartService:CartService) {}
-   
-   ngOnInit(): void {
-    this.productsService.getAllProducts().subscribe((data : productlist[]) => {
+    private route: ActivatedRoute,
+    private productsService: ProductsService,
+    private cartService: CartService) { }
+
+  ngOnInit(): void {
+    this.productsService.getAllProducts().subscribe((data: productlist[]) => {
       this.productlist = data;
     })
-    
+
   }
-  getAllProducts(){
+  getAllProducts() {
 
     this.http.get<any>('https://localhost:44307/products/getallproducts').subscribe(
       // this.http.get<any>('http://localhost:3000/products').subscribe(
@@ -59,26 +60,23 @@ export class ViewAllProductComponent implements OnInit {
 
         this.productlist = response;
 
-       });
+      });
 
   }
-  itemsCart:any = [];
-  addToCart(products: productlist)
-  {
-    // this.cartService.addToCart(products);
-    // console.log(products)
+  itemsCart: any = [];
+  addToCart(products: productlist) {
     window.alert('product added!');
-    
 
-``
+
+    ``
 
     let cartDataNull = localStorage.getItem('localCart');
 
 
 
-    if(cartDataNull == null){
+    if (cartDataNull == null) {
 
-      let storeDataGet:any = [];
+      let storeDataGet: any = [];
 
       storeDataGet.push(products);
 
@@ -86,30 +84,29 @@ export class ViewAllProductComponent implements OnInit {
 
     }
 
-    else{
+    else {
 
       var id = products.product_id;
 
-      let index:number = -1;
+      let index: number = -1;
 
       this.itemsCart = JSON.parse(localStorage.getItem('localCart') || '{}');
 
 
-    for (let i=0; i<this.itemsCart.length; i++)
-    {
-      if(this.itemsCart[i].product_id === products.product_id){
+      for (let i = 0; i < this.itemsCart.length; i++) {
+        if (this.itemsCart[i].product_id === products.product_id) {
 
-                this.itemsCart[i].prodquantity+=1;
-        
-                index=1;
-                localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
-        
-                break;
-        
-              }  
-    }
+          this.itemsCart[i].prodquantity += 1;
 
-      if(index == -1){
+          index = 1;
+          localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+
+          break;
+
+        }
+      }
+
+      if (index == -1) {
 
         this.itemsCart.push(products);
 
@@ -117,7 +114,7 @@ export class ViewAllProductComponent implements OnInit {
 
       }
 
-      else{
+      else {
 
         localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
 
@@ -127,59 +124,9 @@ export class ViewAllProductComponent implements OnInit {
 
 
 
+    }
+
   }
-  }
-  // items: productlist[] = [];
-
-  itm_count = 0;
-//   addToCarts(products: productlist) {
-
-//     window.alert('product added!');
 
 
-//     let productsExists = false;
-//     let i = 0;
-//     for (i=0; i<this.productlist.length; i++)
-//     // for(let i in this.productlist)
-//     {
-
-//       if(this.productlist[i].product_id === products.product_id){
-
-//         this.productlist[i].prodquantity++;
-
-//         productsExists = true;
-//         localStorage.setItem('localCart', JSON.stringify(this.productlist));
-
-//         break;
-
-//       }      
-
-//     }
-
-//     if(productsExists==false){            
-     
-//       this.productlist.push(products);    
-//       localStorage.setItem('localCart', JSON.stringify(this.productlist));
-
-//   }      
-  
-//   else{
-
-//     localStorage.setItem('localCart', JSON.stringify(this.productlist));
-
-
-
-//   }
-
-
-
-// }
-
-
-
-
-      
-  
-  
-  
 }
