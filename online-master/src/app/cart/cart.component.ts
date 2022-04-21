@@ -70,13 +70,37 @@ export class CartComponent implements OnInit {
   }
 
 
+  addToCart(products: productlist,quantity =1) {
+
+    let productsExists = false
+
+    for(let i in this.getCartDetails){
+
+      if(this.getCartDetails[i].product_id === products.product_id){
+
+        this.getCartDetails[i].quantity++
+
+        productsExists = true
+
+        break;
+
+      }      
+
+    }
+
+    if(!productsExists){            
+
+      this.getCartDetails.push(products);    
+
+  }      
+
+  }
 
 
-
-  // emptyCart()
-  // {
-  //   this.cartService.clearCart();
-  // }
+  emptyCart()
+  {
+    this.cartService.clearCart();
+  }
   // removeFromCart() {
   //   this.getCartDetails.pop();
   // }
@@ -158,7 +182,7 @@ export class CartComponent implements OnInit {
 
       for( let i=0; i<this.getCartDetails.length; i++){
 
-        if(this.getCartDetails[i].prodid === getCartDetail){
+        if(this.getCartDetails[i].product_id === getCartDetail){
 
           this.getCartDetails.splice(i, 1);
 

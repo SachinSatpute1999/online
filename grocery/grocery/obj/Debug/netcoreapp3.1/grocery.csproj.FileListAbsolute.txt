@@ -126,7 +126,6 @@ D:\p1\grocery\grocery\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 D:\p1\grocery\grocery\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\p1\grocery\grocery\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\p1\grocery\grocery\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\grocery.csproj.AssemblyReference.cache
 D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\grocery.GeneratedMSBuildEditorConfig.editorconfig
 D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\grocery.AssemblyInfoInputs.cache
 D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\grocery.AssemblyInfo.cs
@@ -159,3 +158,4 @@ D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\Razor\Views\Products\Delete.cshtml
 D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\Razor\Views\Products\Details.cshtml.g.cs
 D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\Razor\Views\Products\Edit.cshtml.g.cs
 D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\Razor\Views\Products\Index.cshtml.g.cs
+D:\p1\grocery\grocery\obj\Debug\netcoreapp3.1\grocery.csproj.AssemblyReference.cache

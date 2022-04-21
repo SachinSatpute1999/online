@@ -99,6 +99,9 @@
     padding: 5px;
   
   }
+  .quan:hover{
+    color: #f44336;
+  }
   
   .delete{
   

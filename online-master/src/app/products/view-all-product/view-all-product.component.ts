@@ -36,6 +36,7 @@ export class productlist{
 export class ViewAllProductComponent implements OnInit {
 
    productlist:any[]=[];
+  items: any;
   constructor(private http: HttpClient,
     private route:ActivatedRoute,
     private productsService:ProductsService,
@@ -94,6 +95,19 @@ export class ViewAllProductComponent implements OnInit {
       this.itemsCart = JSON.parse(localStorage.getItem('localCart') || '{}');
 
 
+    for (let i=0; i<this.itemsCart.length; i++)
+    {
+      if(this.itemsCart[i].product_id === products.product_id){
+
+                this.itemsCart[i].prodquantity+=1;
+        
+                index=1;
+                localStorage.setItem('localCart', JSON.stringify(this.itemsCart));
+        
+                break;
+        
+              }  
+    }
 
       if(index == -1){
 
@@ -115,4 +129,57 @@ export class ViewAllProductComponent implements OnInit {
 
   }
   }
+  // items: productlist[] = [];
+
+  itm_count = 0;
+//   addToCarts(products: productlist) {
+
+//     window.alert('product added!');
+
+
+//     let productsExists = false;
+//     let i = 0;
+//     for (i=0; i<this.productlist.length; i++)
+//     // for(let i in this.productlist)
+//     {
+
+//       if(this.productlist[i].product_id === products.product_id){
+
+//         this.productlist[i].prodquantity++;
+
+//         productsExists = true;
+//         localStorage.setItem('localCart', JSON.stringify(this.productlist));
+
+//         break;
+
+//       }      
+
+//     }
+
+//     if(productsExists==false){            
+     
+//       this.productlist.push(products);    
+//       localStorage.setItem('localCart', JSON.stringify(this.productlist));
+
+//   }      
+  
+//   else{
+
+//     localStorage.setItem('localCart', JSON.stringify(this.productlist));
+
+
+
+//   }
+
+
+
+// }
+
+
+
+
+      
+  
+  
+  
 }

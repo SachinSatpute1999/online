@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class CartService {
  
-  // items: productlist[] = [];
+  items: productlist[] = [];
 
   // addToCart(products: productlist) {
   //   this.items.push(products);
@@ -19,10 +19,10 @@ export class CartService {
   //   return this.items;
   // }
 
-  // clearCart() {
-  //   this.items = [];
-  //   return this.items;
-  // }
+  clearCart() {
+    this.items = [];
+    return this.items;
+  }
   
   
   // getTotal(){
