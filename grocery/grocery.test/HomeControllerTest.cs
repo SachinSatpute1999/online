@@ -27,7 +27,23 @@ namespace grocery.test
 
 
         }
-       
+        [TestMethod]
+        public void privacyTest()
+        {
+            //Arrange
+            HomeController controller = new HomeController();
+
+
+            //act
+            var result = controller.Privacy();
+
+
+            //assert
+            Assert.IsTrue(result is ViewResult, "Index action does not return view");
+
+
+        }
+
 
 
 

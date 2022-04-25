@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,16 @@ namespace grocery.test
         {
             ProductsControllerTest controller = new ProductsControllerTest();
 
-            //var result = controller.GetAllProducts();
+        //    var result1 = controller.GetAllProducts()
+
+
+            //assert
+        //    Assert.IsTrue(result1 is ViewResult, "Index action does not return view");
+
+
         }
+
+       
+    }
     }
 }

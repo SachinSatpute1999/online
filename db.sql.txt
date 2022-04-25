@@ -1,0 +1,35 @@
+select * from products
+  drop table products;
+  
+  
+CREATE TABLE  public.products
+(
+product_id SERIAL,
+p_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+category_id integer,
+	prodquantity INTEGER NOT NULL,
+price Integer NOT NULL,
+photo character varying(500) COLLATE pg_catalog."default" NOT NULL,
+description text COLLATE pg_catalog."default" NOT NULL,
+CONSTRAINT products_pkey PRIMARY KEY (product_id),
+CONSTRAINT products_category_id_fkey FOREIGN KEY (category_id)
+REFERENCES public.product_category (category_id) MATCH SIMPLE
+
+ON UPDATE NO ACTION
+ON DELETE NO ACTION
+	)
+	
+	
+INSERT INTO products(product_id,p_name,category_id,prodquantity,price,photo,description)
+VALUES (101,'Toordal',3,1,278,'assets/toordal.jpg','It can be used to prepare sambar, dal tadka, the Maharashtrian varan, and more. '),
+(102,'Sticks',1,1,174,'assets/sticks.jpg','Soya Snax is a delectable snacking option for any time of the day.');
+
+
+INSERT INTO products(product_id,p_name,category_id,prodquantity,price,photo,description)
+VALUES (103,'Almonds',2,1,10,'assets/almonds.jpg','A pack of nut that prepares you for a power packed day ahead.'),
+       (104,'Biscuits',1,1,20,'assets/biscuits.jpg','Sunfeast marie light is enriched with the goodness of six vitamins and wheat fibre.'),
+	   (105,'Chips',1,1,200,'assets/chips.jpg','The potatoes have now become delicious chips and are packed and delivered to a store near you.'),
+	   (106,'Vatana',3,1,165,'assets/vatana.jpg','Green peas are fairly low in calories and contain several vitamins, minerals and antioxidants.'),
+	   (107,'Kaju',2,1,243,'assets/kaju.jpg','Helps maintain Brains Health'),
+	   (108,'Pista',2,1,144,'assets/pista.jpg','High protein, dietary fiber, Gluten-Free, Non-GMO, zero transfat, zero cholesterol.');
+	   
